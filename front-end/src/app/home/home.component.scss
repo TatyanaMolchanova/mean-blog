@@ -1,0 +1,15 @@
+.figure {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  color: #fff;
+  padding-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.photo {
+  position: absolute;
+  width: 100%;
+  margin: -10% 0 0 0;
+  z-index: -1;
+}
