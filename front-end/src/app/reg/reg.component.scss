@@ -1,0 +1,16 @@
+.container {
+  max-width: 400px;
+  margin-top: 6rem;
+}
+
+.form-control {
+  background-color: rgb(232, 240, 254) !important;
+}
+
+input::-webkit-input-placeholder {
+  color: grey !important;
+}
+
+input::placeholder {
+  color: grey !important;
+}

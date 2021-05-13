@@ -6,9 +6,14 @@
         <a class="nav-link" aria-current="page" [routerLink]="['/']" routerLinkActive="active-link"
            [routerLinkActiveOptions]="{exact: true}">Home</a>
         <a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="active-link"
+           *ngIf="!authService.isAuthenticated()"
            [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
-        <a class="btn btn-outline-primary me-2" [routerLink]="['/auth']" tabindex="-1" aria-disabled="true">Sign in</a>
-        <a class="btn btn-outline-primary" [routerLink]="['/reg']" tabindex="-1" aria-disabled="true">Sign up</a>
+        <a class="btn btn-outline-primary me-2"  *ngIf="authService.isAuthenticated()"
+           [routerLink]="['/auth']" tabindex="-1" aria-disabled="true">Sign in</a>
+        <a class="btn btn-outline-primary me-2" *ngIf="authService.isAuthenticated()"
+           [routerLink]="['/reg']" tabindex="-1" aria-disabled="true">Sign up</a>
+        <a class="btn btn-outline-warning"  *ngIf="!authService.isAuthenticated()"
+           (click)="logoutUser()" tabindex="-1" aria-disabled="true">Logout</a>
       </div>
     </div>
   </div>

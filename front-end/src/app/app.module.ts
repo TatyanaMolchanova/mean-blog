@@ -8,6 +8,11 @@ import { HeaderComponent } from './header/header.component';
 import { RegComponent } from './reg/reg.component';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormsModule } from "@angular/forms";
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { AuthService } from "./auth.service";
+import { HttpClientModule } from "@angular/common/http";
+// import { HttpModule } from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -20,9 +25,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    FlashMessagesModule.forRoot(),
+    // HttpModule
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

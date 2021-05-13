@@ -1,0 +1,12 @@
+.container {
+  max-width: 400px;
+  margin-top: 6rem;
+}
+
+input::-webkit-input-placeholder {
+  color: grey !important;
+}
+
+input::placeholder {
+  color: grey !important;
+}
