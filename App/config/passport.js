@@ -6,7 +6,11 @@ const JwtStrategy = require('passport-jwt').Strategy,
 
 module.exports = function(passport) {
     const opts = {}
+    // opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
+    // opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('Bearer');
     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+    // opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
+    // opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('JWT');
     opts.secretOrKey = config.secret;
     // jwt_payload - user who is trying get authorization
     passport.use(new JwtStrategy(opts, function(jwt_payload, done) {

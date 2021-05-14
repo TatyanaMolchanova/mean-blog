@@ -46,7 +46,10 @@ router.post('/auth', (req, res) => {
 
                 res.json({
                     success: true,
-                    token: 'JWT' + token,
+                    // token: 'JWT ' + token,
+                    // token: 'Bearer ' + token,
+                    token: token,
+                    // token: 'jwt ' + token,
                     user: {
                         id: user._id,
                         name: user.name,
@@ -66,7 +69,9 @@ router.post('/auth', (req, res) => {
 // URL of user's cabinet
 // disallow access to dashboard page until session is not false - only when user will authorize he'll get access to it
 // router.get('/dashboard', passport.authenticate('jwt', {session: false}), (req, res) => {
-router.post('/dashboard', (req, res) => {
+// work only if user is authorized
+router.post('/dashboard', passport.authenticate('jwt', { session: false }),
+    (req, res) => {
 // router.get('/dashboard', (req, res) => {
     // message in browser on main page
     // res.send('Dashboard page!')

@@ -77,15 +77,23 @@ export class AuthService {
   }
 
   createPost(post: Post) {
-    let headers = new HttpHeaders()
-    headers.append('Content-Type', 'application/json')
+    // let headers = new HttpHeaders();
+    // // headers.append('Authorization', localStorage.getItem('token'));
+    // // headers.append('Authorization', `${JSON.parse(localStorage.getItem('token'))}`);
+    // headers.append('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    // headers.append('Content-Type', 'application/json');
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
+    // return this.http.post<Post>('http://localhost:3000/account/dashboard', post,
+    //   {headers: headers});
     return this.http.post<Post>('http://localhost:3000/account/dashboard', post,
-      {headers: headers})
+      {headers: httpHeaders});
   }
 
   getAllPosts() {
     return this.http.get('http://localhost:3000')
-      // .pipe(map(res => res.json()));
   }
 
   getPostById(id) {
@@ -93,7 +101,11 @@ export class AuthService {
   }
 
   deletePost(id) {
-    return this.http.delete<Post>(`http://localhost:3000/post/${id}`)
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
+    return this.http.delete<Post>(`http://localhost:3000/post/${id}`, {headers: httpHeaders})
       // .pipe(map(res => res.json()))
   }
 }
