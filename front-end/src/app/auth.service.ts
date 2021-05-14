@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { map } from "rxjs/operators";
 
 export class RegisterResponse {
   public success: boolean;
@@ -19,6 +20,17 @@ export class UserResponse {
   public name: string;
   public login: string;
   public email: string;
+}
+
+export class Post {
+  public success?: boolean;
+  public msg?: string;
+  category: string;
+  title: string;
+  photo: string;
+  text: string;
+  author: string;
+  date: Date;
 }
 
 @Injectable({
@@ -62,5 +74,26 @@ export class AuthService {
 
   isAuthenticated() {
     return this.jwtHelper.isTokenExpired(this.token);
+  }
+
+  createPost(post: Post) {
+    let headers = new HttpHeaders()
+    headers.append('Content-Type', 'application/json')
+    return this.http.post<Post>('http://localhost:3000/account/dashboard', post,
+      {headers: headers})
+  }
+
+  getAllPosts() {
+    return this.http.get('http://localhost:3000')
+      // .pipe(map(res => res.json()));
+  }
+
+  getPostById(id) {
+    return this.http.get(`http://localhost:3000/post/${id}`)
+  }
+
+  deletePost(id) {
+    return this.http.delete<Post>(`http://localhost:3000/post/${id}`)
+      // .pipe(map(res => res.json()))
   }
 }

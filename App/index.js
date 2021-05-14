@@ -8,6 +8,7 @@ const path = require('path');
 const config = require('./config/db');
 // Connect file account.js part 1
 const account = require('./routes/account');
+const Post = require('./models/post')
 
 // Initiate app
 const app = express();
@@ -22,7 +23,8 @@ require('./config/passport')(passport);
 // for using others' sites API, social net authorization, for examle
 app.use(cors());
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 1000000}));
 
 // Connecting to database
 mongoose.connect(config.db, {
@@ -56,8 +58,26 @@ app.listen(port, () => {
 // app.get('/') - main page
 app.get('/', (req, res) => {
     // message in browser on main page
-    res.send('Main blog page!')
+    // res.send('Main blog page!')
+
+    //get all the posts from the database
+    Post.find().then( posts => res.json(posts))
 });
+
+//get post by id
+app.get('/post/:id', (req, res) => {
+    let url = req.url.split('/')
+    let id = url[2]
+    Post.findById(id).then( post => res.json(post))
+});
+
+//delete post by id
+app.delete('/post/:id', (req, res) => {
+    let url = req.url.split( '/' )
+    let id = url[2]
+    Post.deleteOne({ _id: id}).then( () => res.json({ success: true }))
+});
+
 
 // Connect file account.js part 2
 app.use('/account', account);

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService, Post} from "../auth.service";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  posts: Post[] = []
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.getAllPosts().subscribe((posts: Post[]) =>
+      this.posts = posts,
+      // console.log('posts', this.posts)
+      (err) => {},
+        // cut length of post:
+      () => {
+        for (let i = 0; i < this.posts.length; i++) {
+          // console.log('this.posts[i].text', this.posts[i].text)
+          this.posts[i].text = this.posts[i].text.substring(0, 250)
+        }
+      }
+    )
   }
 
 }

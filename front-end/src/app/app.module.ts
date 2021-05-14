@@ -12,7 +12,8 @@ import { FormsModule } from "@angular/forms";
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthService } from "./auth.service";
 import { HttpClientModule } from "@angular/common/http";
-// import { HttpModule } from "@angular/http";
+import { QuillModule } from 'ngx-quill';
+import { PostComponent } from './post/post.component'
 
 @NgModule({
   declarations: [
@@ -21,15 +22,16 @@ import { HttpClientModule } from "@angular/common/http";
     HeaderComponent,
     RegComponent,
     AuthComponent,
-    DashboardComponent
+    DashboardComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     FlashMessagesModule.forRoot(),
-    // HttpModule
-    HttpClientModule
+    HttpClientModule,
+    QuillModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
