@@ -1,15 +1,15 @@
 <div class="nav-scroller py-1 mb-2">
   <nav class="nav d-flex justify-content-between">
-    <a class="p-2 link-secondary" href="#">World</a>
-    <a class="p-2 link-secondary" href="#">Technology</a>
-    <a class="p-2 link-secondary" href="#">Design</a>
-    <a class="p-2 link-secondary" href="#">Culture</a>
-    <a class="p-2 link-secondary" href="#">Business</a>
-    <a class="p-2 link-secondary" href="#">Opinion</a>
-    <a class="p-2 link-secondary" href="#">Science</a>
-    <a class="p-2 link-secondary" href="#">Health</a>
-    <a class="p-2 link-secondary" href="#">Style</a>
-    <a class="p-2 link-secondary" href="#">Travel</a>
+    <a class="p-2 link-secondary" (click)="setCategory('World')">World</a>
+    <a class="p-2 link-secondary" (click)="setCategory('Technology')">Technology</a>
+    <a class="p-2 link-secondary" (click)="setCategory('Design')">Design</a>
+    <a class="p-2 link-secondary" (click)="setCategory('Culture')">Culture</a>
+    <a class="p-2 link-secondary" (click)="setCategory('Business')">Business</a>
+    <a class="p-2 link-secondary" (click)="setCategory('Opinion')">Opinion</a>
+    <a class="p-2 link-secondary" (click)="setCategory('Science')">Science</a>
+    <a class="p-2 link-secondary" (click)="setCategory('Health')">Health</a>
+    <a class="p-2 link-secondary" (click)="setCategory('Style')">Style</a>
+    <a class="p-2 link-secondary" (click)="setCategory('Travel')">Travel</a>
   </nav>
 </div>
 
@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div *ngFor="let post of posts" class="col-md-4">
+  <div *ngFor="let post of posts | sorting: category" class="col-md-4">
     <div class="p-0 mb-3 box-shadow">
 <!--      <img class="card-img-top"  src="https://www.la-palafitta.com/website-images/test/image-thumb__33__header-large/lapalafitta-03.jpeg">-->
       <quill-view [content]="post.photo"></quill-view>

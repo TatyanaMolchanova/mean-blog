@@ -13,7 +13,8 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthService } from "./auth.service";
 import { HttpClientModule } from "@angular/common/http";
 import { QuillModule } from 'ngx-quill';
-import { PostComponent } from './post/post.component'
+import { PostComponent } from './post/post.component';
+import { SortingPipe } from './sorting.pipe'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PostComponent } from './post/post.component'
     RegComponent,
     AuthComponent,
     DashboardComponent,
-    PostComponent
+    PostComponent,
+    SortingPipe
   ],
   imports: [
     BrowserModule,
